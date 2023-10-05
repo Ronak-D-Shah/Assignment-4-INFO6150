@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Feedback</title>
+    <style>
+    label {	float: left;
+			width: 150px;}
+      #container{
+          width: 700px;
+          margin: auto;
+          background-color: beige;
+          padding: 30px;
+      } 
+      main{
+          padding: 50px;
+      }
+        label {
+            width: 200px;
+            float: left;
+        }
+        .control {
+            margin-bottom: 20px;
+        }
+
+        table th ,td{
+            border: 2px solid black;
+            height: 50px;
+        }
+
+        td{
+            text-align: center;
+        }
+
+        table{
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 15px;
+        }
+#checkboxContainer {
+    margin-top: 10px;
+}
+
+#checkboxContainer label:first-child {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+#checkboxContainer input[type="checkbox"] {
+    display: inline-block;
+    margin-right: 5px;
+}
+
+#textField {
+    display: none;
+    margin-top: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+    </style>
+
+<script>
+    function addCheckboxAndTextField() {
+        const selectElement = document.getElementById("mySelect");
+        const selectedOption = selectElement.value;
+        
+        const checkboxContainer = document.getElementById("checkboxContainer");
+        
+        checkboxContainer.innerHTML = "";
+        
+        let checkboxOptions = [];
+        
+        if (selectedOption === "option1" || selectedOption === "option4") {
+            checkboxOptions = ["Small", "Large"];
+        } else if (selectedOption === "option2" || selectedOption === "option3" || selectedOption === "option5") {
+            checkboxOptions = ["Small", "Medium", "Large"];
+        }
+        
+        const sizeLabel = document.createElement("label");
+        sizeLabel.textContent = "Select your size:";
+        checkboxContainer.appendChild(sizeLabel);
+        
+        for (const option of checkboxOptions) {
+            const checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.name = "drinkSize";
+            checkbox.value = option;
+            
+            checkbox.addEventListener("change", function() {
+                const textField = document.getElementById("textField");
+                if (this.checked) {
+                    textField.style.display = "block";
+                    textField.required = true;
+                } else {
+                    textField.style.display = "none";
+                    textField.required = false;
+                }
+            });
+            
+            const label = document.createElement("label");
+            label.textContent = option;
+            
+            checkboxContainer.appendChild(checkbox);
+            checkboxContainer.appendChild(label);
+        }
+        
+        const textField = document.createElement("input");
+        textField.type = "text";
+        textField.id = "textField";
+        textField.name = "drinkNotes";
+        textField.placeholder = "Enter any additional notes";
+        textField.style.display = "none"; 
+        
+        checkboxContainer.appendChild(textField);
+    }
+</script>
+
+</head>
+<body>
+    <div id="container">
+    <main>
+        <h2>Feeback</h2>
+        <h3>Love something? Hate something? Let us know!</h3>
+            Note : Fields marked with an asterisk(*) are mandatory
+            <br><br>
+        <form action="" id="my-form" name="myForm">
+            <div class="control">
+                <label>Title* - </label>
+                <input type="radio" name="title" id="miss" value="miss" required> Miss
+                <input type="radio" name="title" id="mr" value="mr" required> Mr
+                <input type="radio" name="title" id="mrs" value="mrs" required> Mrs
+            </div>
+            <div class="control">
+                <label for="name">Name* - </label>
+                <input type="text" name="name" id="name" placeholder="Enter Name Here" minlength="2" maxlength="50" required>
+            </div>
+            <div id="error_name" style="display: none; color: red;">
+                Invalid Name, Please enter valid name.
+                <br><br>
+            </div>
+            <div class="control">
+                <label for="email">Email* - </label>
+                <input type="text" name="email" id="email" placeholder="Enter Email Id" required>
+            </div>
+            <div id="error_email" style="display: none; color: red;">
+                Invalid email address. Please use @northeastern.edu domain.
+                <br><br>
+            </div>
+            <div class="control">
+                <label for="phoneNumber">Phone Number* - </label>
+                <input type="text" name="phoneNumber" id="phoneNumber" placeholder="Enter Phone Here" required pattern="\d{3}-?\d{3}-\d{4}$">
+            </div>
+            <div id="error_phoneNumber" style="display: none; color: red;">
+                Invalid Phone Number, Please enter valid phone number ###-###-####.
+                <br><br>
+            </div>
+            <div class="control">
+                <label for="streetAddress1">Street Address1* - </label>
+                <input type="text" name="streetAddress1" id="streetAddress1" placeholder="Enter Street Address" required>
+            </div>
+            <div id="error_streetAddress1" style="display: none; color: red;">
+                Invalid Address, Please enter valid address.
+                <br><br>
+            </div>
+            <div class="control">
+                <label for="streetAddress2">Street Address2 - </label>
+                <input type="text" name="streetAddress2" id="streetAddress2" placeholder="Enter Street Address">
+            </div>
+            <div id="error_streetAddress2" style="display: none; color: red;">
+                Invalid Address, Please enter valid address.
+                <br><br>
+            </div>
+            <div class="control">
+                <label for="city">City*- </label>
+                <input type="text" name="city" id="city" placeholder="Enter City Here" minlength="2" maxlength="50" required>
+            </div>
+            <div id="error_city" style="display: none; color: red;">
+                Invalid City, Please enter valid city.
+                <br><br>
+            </div>
+            <div class="control">
+                <label for="state">State* - </label>
+                <input type="text" name="state" id="state" placeholder="Enter State Here" minlength="2" maxlength="50" required>
+            </div>
+            <div id="error_state" style="display: none; color: red;">
+                Invalid State, Please enter valid state.
+                <br><br>
+            </div>
+            <div class="control">
+                <label for="zipCode">Zip Code* - </label>
+                <input type="text" name="zipCode" id="zipCode" placeholder="Enter Zip Code Here" required pattern="/^\d{5}(?:[-\s]\d{4})?$/">
+            </div>
+            <div id="error_zipCode" style="display: none; color: red;">
+                Invalid Zip Code, Please enter valid zip code.
+                <br><br>
+            </div>
+            <div id="error_comment" style="display: none; color: red;">
+                Comments cannot be empty, Please enter valid comments.
+                <br><br>
+            </div>
+
+            <label for="Drinks">Drinks* - </label>
+            <select id="mySelect" onchange="addCheckboxAndTextField()">
+                <option value="option1">Water</option>
+                <option value="option2">Tea</option>
+                <option value="option3">Coffee</option>
+                <option value="option4">Soda</option>
+                <option value="option5">Juice</option>
+            </select>
+            <br><br>
+        
+            <div id="checkboxContainer">
+            </div>
+            <br><br>
+
+            <label for="hearUs">How did you hear*:</label>
+			<input type='checkbox' name="source" value="facebook" /> Facebook
+            <input type='checkbox' name="source" value="google" /> Google
+            <input type='checkbox' name="source" value="yelp" /> Yelp 
+			<br><br>
+            <div class="control">
+                <label for="comment">Comments* - </label>
+                <textarea name="comment" id="comment" cols="30" rows="10" placeholder="Enter Comment Here" required></textarea>
+            </div>
+
+            <div id="result"></div>
+
+            <input type="submit" id="entry" value="Submit" name="submit" disabled="disabled">
+            <input type="reset" value="Reset" name="resetBtn" id="resetBtn">
+        </form>
+    </main>
+    </div>
+    <table id="resultsTable">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Name</th>
+                <th>Email ID</th>
+                <th>Phone Number</th>
+                <th>Street Address 1</th>
+                <th>Street Address 2</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Zip Code</th>
+                <th>Comments</th>
+                <th>Drinks (Size)</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    
+    <script src="script.js"></script>
+</body>
+</html>
